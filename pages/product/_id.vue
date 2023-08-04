@@ -161,6 +161,7 @@
           .then(res => {
             console.log("yes");
             console.log(res.data)
+            this.$router.go()
           })
           .catch(err => {
             console.log('no');
