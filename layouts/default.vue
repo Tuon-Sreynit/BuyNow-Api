@@ -138,7 +138,7 @@
         </v-list-item>
         <v-list-item
           router
-          exact to="/manage_subscription"
+          exact to="/history"
         >
           <v-list-item-action>
             <v-icon>mdi-history</v-icon>

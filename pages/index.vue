@@ -130,7 +130,7 @@ import HomeChart from '~/components/charts/HomeChart.vue'
       const axios = require('axios');
       let category=[]
             axios
-                .get(`http://localhost:3001/api/category/`)
+                .get(`https://buynow-api.onrender.com/api/category/`)
                 .then((res) => {
 
                   this.categories= res.data
@@ -146,7 +146,7 @@ import HomeChart from '~/components/charts/HomeChart.vue'
       const axios = require('axios');
       let product=[]
             axios
-                .get(`http://localhost:3001/api/product`)
+                .get(`https://buynow-api.onrender.com/api/product`)
                 .then((res) => {
 
                   this.products= res.data
@@ -170,7 +170,7 @@ import HomeChart from '~/components/charts/HomeChart.vue'
                 }
                 
             axios
-                .get(`http://localhost:3001/auth/users/all`,config)
+                .get(`https://buynow-api.onrender.com/auth/users/all`,config)
                 .then((res) => {
 
                   this.users= res.data.data.docs

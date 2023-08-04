@@ -227,7 +227,7 @@ export default {
         this.cate=''
       }else {
         this.$axios
-          .get('http://localhost:3001/api/category/')
+          .get('https://buynow-api.onrender.com/api/category/')
           .then((res) => (this.categories = res.data))
       }
     },
@@ -244,7 +244,7 @@ export default {
       const axios = require('axios');
       let category=[]
             axios
-                .get(`http://localhost:3001/api/category/`)
+                .get(`https://buynow-api.onrender.com/api/category/`)
                 .then((res) => {
 
                   this.categories= res.data
@@ -267,7 +267,7 @@ export default {
         if (this.file) {
             let formData = new FormData()
             formData.append('file', this.file)
-            const res = await this.$axios.post('http://localhost:3001/upload-image', formData)
+            const res = await this.$axios.post('https://buynow-api.onrender.com/upload-image', formData)
             this.image_url = res.data
         }
         let data = {
@@ -276,7 +276,7 @@ export default {
     
       }
 
-        await this.$axios.post('http://localhost:3001/api/category/add',data)
+        await this.$axios.post('https://buynow-api.onrender.com/api/category/add',data)
         this.$nuxt.$emit('getProduct')
         this.status = 'OK'
         this.message = 'Success'

@@ -95,6 +95,7 @@ export default {
         let response = await this.$auth.loginWith('local', { data: this.login })
         //user login success redirect user to home page
         if (response.data.success) {
+          localStorage.setItem('user', JSON.stringify(response.data.data) )
           this.$router.push('/')
         }
       } catch (err) {

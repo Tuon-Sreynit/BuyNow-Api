@@ -205,7 +205,7 @@ export default {
                 }
                 
             axios
-                .get(`http://localhost:3001/auth/users/all`,config)
+                .get(`https://buynow-api.onrender.com/auth/users/all`,config)
                 .then((res) => {
 
                   this.users= res.data.data.docs
@@ -236,7 +236,7 @@ export default {
       
         }
    
-        await this.$axios.put(`http://localhost:3001/auth/block-user/${_id}`,data,config)
+        await this.$axios.put(`https://buynow-api.onrender.com/auth/block-user/${_id}`,data,config)
         this.$nuxt.$emit('getProduct')
         this.status = 'OK'
         this.message = 'Success'
@@ -271,7 +271,7 @@ export default {
       
         }
    
-        await this.$axios.put(`http://localhost:3001/auth/unblock-user/${_id}`,data,config)
+        await this.$axios.put(`https://buynow-api.onrender.com/auth/unblock-user/${_id}`,data,config)
         this.$nuxt.$emit('getProduct')
         this.status = 'OK'
         this.message = 'Success'

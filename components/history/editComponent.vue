@@ -127,7 +127,7 @@ export default {
         this.message = 'Success'
         this.dialog = false
         
-       location.replace('/manage_subscription')
+       location.replace('/history')
       } catch (error) {
         this.status = 'ERROR'
         this.message = 'Something went wrong'

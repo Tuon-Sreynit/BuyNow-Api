@@ -88,7 +88,7 @@ export default {
  
    getCategoryData(){
           axios
-              .get(`http://localhost:3001/api/category/${this.id}`)
+              .get(`https://buynow-api.onrender.com/api/category/${this.id}`)
               .then((res) => {
                 this.name= res.data
         
@@ -111,7 +111,7 @@ export default {
         }
 
           
-        await this.$axios.put(`http://localhost:3001/api/category/${this.id}`,data)
+        await this.$axios.put(`https://buynow-api.onrender.com/api/category/${this.id}`,data)
 
         this.$nuxt.$emit('getProduct')
         this.status = 'OK'

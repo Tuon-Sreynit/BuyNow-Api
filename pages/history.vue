@@ -4,44 +4,18 @@
             <v-container>
                 <v-row>
                   <h2 class="ml-3" style="color: white">
-                    Manage Subscription 
+                    Manage History
                   </h2>
                   </v-row>
                   <v-row>
-                    <v-col  align="start ">
-                      <v-text-field
-                        v-model="search"
-                        append-icon="mdi-magnify"
-                        label="Search"
-                        single-line
-                        hide-details
-                        dense
-                        filled
-                        outlined
-                        solo
-                       
-                      ></v-text-field>
-                    </v-col>
+                  
                     <v-col align="end" style="margin-top: 18px; margin-right: 12px">
                       <v-row justify="end">
                         <v-dialog v-model="dialog" persistent max-width="600px">
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-btn
-                              v-bind="attrs"
-                              v-on="on"
-                              style="
-                                background-image: linear-gradient(  to top,#48c6ef 0%,   #6f86d6 100%  );
-                                color: whitesmoke !important;
-                                margin-left: 40px;
-                              "
-                            >
-                              <h3>ADD</h3>
-                            </v-btn>
-                          </template>
                           <form @submit.prevent="save" >
                                 <v-card>
                             <v-card-title  class="green green-darken-1 white--text">
-                              <span class="text-h5 white--text">Add Subscription Plan</span>
+                              <span class="text-h5 white--text">Add </span>
                             </v-card-title>
                             <v-card-text>
                               <v-container>
@@ -143,6 +117,7 @@
           <v-col align="center" >
             <template v-slot:header.id="{ header }">
          {{ header.text }}
+         
          </template>
          </v-col>
       
@@ -166,8 +141,8 @@
     </div>
 </template>
 <script>
-import editComponent from '~/components/subscription/editComponent.vue'
-import deleteComponent from '~/components/subscription/deleteComponent.vue'
+import editComponent from '~/components/history/editComponent.vue'
+import deleteComponent from '~/components/history/deleteComponent.vue'
 export default {
   components:{
    editComponent, deleteComponent
@@ -179,7 +154,6 @@ export default {
          name:'',
          price:'',
          description:'',
-         day:'',
          isLoading: false,
         status: '',
         message: '',
@@ -191,11 +165,14 @@ export default {
           //   value: 'id',
           //   class: "green green-darken-1 white--text",
           // },
-          { text: 'Package Name', value: 'name', class: "green green-darken-1 white--text" },
-          { text: 'Price', value: 'price', class: "green green-darken-1 white--text" },
-          { text: 'Description', value: 'description', class: "green green-darken-1 white--text " ,  },
-          { text: 'Duration (Days)', value: 'value', class: "green green-darken-1 white--text " ,  },
-          { text: 'Action', value: 'action', class: "green green-darken-1 white--text" },
+          { text: 'User name', value: 'name', class: "blue blue-darken-1 white--text" },
+          { text: 'Product name', value: 'price', class: "blue blue-darken-1 white--text" },
+          { text: 'Price', value: 'value', class: "blue blue-darken-1 white--text " ,  },
+          { text: 'quantity', value: 'value', class: "blue blue-darken-1 white--text " ,  },
+          { text: 'Description', value: 'description', class: "blue blue-darken-1 white--text " ,  },
+          
+          { text: 'Total', value: 'value', class: "blue blue-darken-1 white--text " ,  },
+
         ],
       
         products: [],
@@ -211,61 +188,6 @@ export default {
     }, middleware: [
     'auth'
   ],
-   
-  created() {
-      this.getSubData();
-      
-  },
-   
-    methods: {
-      async save() {
-      this.isLoading = true
-
- 
-
-      try {
-        console.log(this.cate)
-        let data = {
-          name:this.name,
-          price:this.price,
-          description:this.description,
-          value:this.day,
-      
-      }
-   
-        await this.$axios.post('https://sabay-entertainment-movie-api-1308.onrender.com/api/subscription/add',data)
-        this.$nuxt.$emit('getProduct')
-        this.status = 'OK'
-        this.message = 'Success'
-        this.dialog = false
-        this.getSubData();
-       // location.replace('/manage_movie_subcate')
-      } catch (error) {
-        this.status = 'ERROR'
-        this.message = 'Something went wrong'
-      }
-
-      setTimeout(() => {
-        this.isLoading = false
-      }, 2000)
-    },
-   
-       
-    getSubData(){
-      const axios = require('axios');
-  
-            axios
-                .get(`https://sabay-entertainment-movie-api-1308.onrender.com/api/subscription`)
-                .then((res) => {
-               
-                  this.products= res.data
-                })
-                .catch((error) => {
-                console.log(error.response)
-                })
-      }
-      
-     },
        
     }
 </script>

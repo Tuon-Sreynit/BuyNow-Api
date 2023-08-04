@@ -32,7 +32,7 @@
     methods: {
       deleteConfirm() {
      this.isLoading = true
-     this.$axios.delete(`http://localhost:3001/api/product/${this.id}`).then(() => {
+     this.$axios.delete(`https://buynow-api.onrender.com/api/product/${this.id}`).then(() => {
       this.$nuxt.$emit('getProduct')
       this.isLoading = false
       this.dialog = false

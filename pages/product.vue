@@ -244,24 +244,7 @@ export default {
         //   },
         // ],
         products: [
-          // {
-          //   id: 'ban-001',
-          //   title: 'The Glory',
-          //   type: 'Revange',
-          //   des:'After becoming a primary school teacher, she takes in the son of the man who tormented her the most to enact her vengeance.',
-          //   image:'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRNF8dnUiY8ad1Z9-QRGPoRpqYjvwiVbLHkMcS5SO5h9Wm5SEy3',
-          //   category: 'Home Page',
-          //   movie:'K-Drama'
-          // },
-          // {
-          //   id: 'ban-002',
-          //   title: 'The Glory',
-          //   type: 'Revange',
-          //   des:'After becoming a primary school teacher, she takes in the son of the man who tormented her the most to enact her vengeance.',
-          //   image:'https://th.bing.com/th/id/OIP.Mir4HQdguOeNR8uuBm3jmQHaFo?pid=ImgDet&rs=1',
-          //   category: 'Home Page',
-          //   movie:'K-Drama'
-          // },
+        
         ],
 
         dialog: false,
@@ -289,7 +272,7 @@ export default {
         const axios = require('axios');
       // let products=[]
             axios
-                .get(`http://localhost:3001/api/product/`)
+                .get(`https://buynow-api.onrender.com/api/product/`)
                 .then((res) => {
 
                   this.products= res.data
@@ -305,7 +288,7 @@ export default {
       const axios = require('axios');
 
             axios
-                .get(`http://localhost:3001/api/category`)
+                .get(`https://buynow-api.onrender.com/api/category`)
                 .then((res) => {
 
                   this.cates= res.data
@@ -322,7 +305,7 @@ export default {
       const axios = require('axios');
 
             axios
-                .get(`http://localhost:3001/api/product`)
+                .get(`https://buynow-api.onrender.com/api/product`)
                 .then((res) => {
 
                   this.movies= res.data
@@ -348,7 +331,7 @@ export default {
           if (this.file) {
             let formData = new FormData()
             formData.append('file', this.file)
-            const res = await this.$axios.post('http://localhost:3001/upload-image', formData)
+            const res = await this.$axios.post('https://buynow-api.onrender.com/upload-image', formData)
             this.image_url = res.data
           }
 
@@ -361,7 +344,7 @@ export default {
           image: this.image_url.data
         }
 
-        await this.$axios.post('http://localhost:3001/api/product/add', data)
+        await this.$axios.post('https://buynow-api.onrender.com/api/product/add', data)
 
         this.$nuxt.$emit('getProduct')
         this.status = 'OK'

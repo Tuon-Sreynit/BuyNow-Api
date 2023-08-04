@@ -61,7 +61,7 @@ export default {
       
         }
    
-        await this.$axios.put(`http://localhost:3001/auth/block-user/${this.id}`,data,config)
+        await this.$axios.put(`https://buynow-api.onrender.com/auth/block-user/${this.id}`,data,config)
         this.$nuxt.$emit('getProduct')
         this.status = 'OK'
         this.message = 'Success'
@@ -98,7 +98,7 @@ export default {
       
         }
    
-        await this.$axios.put(`http://localhost:3001/auth/unblock-user/${this.id}`,data,config)
+        await this.$axios.put(`https://buynow-api.onrender.com/auth/unblock-user/${this.id}`,data,config)
         this.$nuxt.$emit('getProduct')
         this.status = 'OK'
         this.message = 'Success'
