@@ -17,6 +17,7 @@ const productRoute = require('./routes/productRoute')
 const SubRoute = require('./routes/subRoute')
 const Payment = require('./routes/paymentRoute')
 const cate = require('./routes/cateRoute')
+const cart= require("./routes/cartRoute");
 //options
 const app = express();
 const port = 3001;
@@ -44,7 +45,8 @@ app.get("/", (req, res) => {
   res.send("hello");
 });
 
-app.use("/auth", authRoute);;
+app.use("/auth", authRoute);
+app.use("/cart", cart);
 app.use('/api/movie', movieRoute)
 app.use('/api/product',productRoute )
 app.use("/api/subscription", SubRoute );
