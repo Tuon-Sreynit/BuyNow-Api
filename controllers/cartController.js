@@ -16,7 +16,7 @@ const createCart = asyncHandler(async(req, res) => {
 const getaCart = asyncHandler(async(req, res) => {
     const { id } = req.params
     try {
-        const findaCart = await Cart.findById(id).populate('product');
+        const findaCart = await Cart.findById(id).populate(['product','user']);
         res.json( findaCart )
     } catch (error) {
         throw new Error(error)
@@ -27,7 +27,7 @@ const getaCart = asyncHandler(async(req, res) => {
 //get all cart
 const getAllCart = asyncHandler(async(req, res) => {
     try {
-        const getallcart = await Cart.find().populate('product');
+        const getallcart = await Cart.find().populate(['product','user']);
         res.json(getallcart)
     } catch (error) {
         throw new Error(error)
