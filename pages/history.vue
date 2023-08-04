@@ -169,11 +169,11 @@ export default {
           //   value: 'id',
           //   class: "green green-darken-1 white--text",
           // },
-          { text: 'User name', value: 'carts._id', class: "blue blue-darken-1 white--text" },
+          { text: 'User name', value: 'user.name', class: "blue blue-darken-1 white--text" },
           { text: 'Product name', value: 'product.name', class: "blue blue-darken-1 white--text" },
           { text: 'Price', value: 'price', class: "blue blue-darken-1 white--text " ,  },
           { text: 'quantity', value: 'quntity', class: "blue blue-darken-1 white--text " ,  },
-          { text: 'Description', value: 'description', class: "blue blue-darken-1 white--text " ,  },
+          { text: 'Description', value: 'product.description', class: "blue blue-darken-1 white--text " ,  },
           
           { text: 'Total', value: 'total', class: "blue blue-darken-1 white--text " ,  },
 
