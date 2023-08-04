@@ -35,11 +35,11 @@
                                       ></v-text-field>
                                     </v-col>
                                     <v-col>
-                                      <v-text-field
+                                      <!-- <v-text-field
                                         label="Duration (Days)"
                                         v-model="day" 
                                         required
-                                      ></v-text-field>
+                                      ></v-text-field> -->
                                     </v-col>
                                   </v-row>
                                   <v-row>
@@ -93,7 +93,7 @@
         <div style="padding:12px">
           <v-data-table
           :headers="headers"
-          :items="products"
+          :items="carts"
           :items-per-page="5"
           :search="search"
           class="elevation-1"
@@ -141,6 +141,8 @@
     </div>
 </template>
 <script>
+
+import axios from 'axios'
 import editComponent from '~/components/history/editComponent.vue'
 import deleteComponent from '~/components/history/deleteComponent.vue'
 export default {
@@ -153,7 +155,6 @@ export default {
          search:'',
          name:'',
          price:'',
-         carts:[],
          cates:[],
          quantity: '',
          description:'',
@@ -161,21 +162,14 @@ export default {
          isLoading: false,
         status: '',
         message: '',
-         headers: [
-          // {
-          //   text: 'ID',
-          //   align: 'start',
-          //   sortable: false,
-          //   value: 'id',
-          //   class: "green green-darken-1 white--text",
-          // },
-          { text: 'User name', value: 'user.name', class: "blue blue-darken-1 white--text" },
+        carts: [],
+        headers: [
+          { text: 'User name', value: 'user.lastname', class: "blue blue-darken-1 white--text" },
           { text: 'Product name', value: 'product.name', class: "blue blue-darken-1 white--text" },
-          { text: 'Price', value: 'price', class: "blue blue-darken-1 white--text " ,  },
-          { text: 'quantity', value: 'quntity', class: "blue blue-darken-1 white--text " ,  },
+          { text: 'Price', value: 'product.price', class: "blue blue-darken-1 white--text " ,  },
+          { text: 'quantity', value: 'quantity', class: "blue blue-darken-1 white--text " ,  },
           { text: 'Description', value: 'product.description', class: "blue blue-darken-1 white--text " ,  },
-          
-          { text: 'Total', value: 'total', class: "blue blue-darken-1 white--text " ,  },
+          { text: 'Total', value: 'price', class: "blue blue-darken-1 white--text " ,  },
 
         ],
       
@@ -192,39 +186,34 @@ export default {
     }, middleware: [
     'auth'
   ],
+  created() {
+      this.getCartData();
+    },
 
-  created(){
-    this.getCate()
-    },
-    mounted(){
-      axios.get('https://buynow-api.onrender.com/cart')
-      .then(res => {
-        this.carts = res.data
-      })
-      .catch(err => {
-        console.error(err)
-      })
-    },
+  // created(){
+  //   this.getCate()
+  //   },
+  //   mounted(){
+  //     axios.get('https://buynow-api.onrender.com/cart')
+  //     .then(res => {
+  //       this.carts = res.data
+  //     })
+  //     .catch(err => {
+  //       console.error(err)
+  //     })
+  //   },
     methods:{
-        searchProduct()
-          {
-            this.$router.push(`/product?search=${this.search}`)
-          },
-      getCate(){
-      const axios = require('axios');
-        axios
-          .get(`https://buynow-api.onrender.com/api/category`)
-          .then((res) => {
+      getCartData(){
+        axios.get('https://buynow-api.onrender.com/cart')
+        .then(res => {
+          this.carts = res.data
+        })
+        .catch(err => {
+          console.error(err)
+        })
 
-              this.cates= res.data
-              // console.log(this.cates)
-
-          })
-          .catch((error) => {
-          console.log(error.response)
-
-          })
-      },
+      }
+  
        
     }
 }
