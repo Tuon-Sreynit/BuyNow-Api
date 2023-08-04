@@ -153,7 +153,11 @@ export default {
          search:'',
          name:'',
          price:'',
+         carts:[],
+         cates:[],
+         quantity: '',
          description:'',
+         total: '80.80',
          isLoading: false,
         status: '',
         message: '',
@@ -165,13 +169,13 @@ export default {
           //   value: 'id',
           //   class: "green green-darken-1 white--text",
           // },
-          { text: 'User name', value: 'name', class: "blue blue-darken-1 white--text" },
-          { text: 'Product name', value: 'price', class: "blue blue-darken-1 white--text" },
-          { text: 'Price', value: 'value', class: "blue blue-darken-1 white--text " ,  },
-          { text: 'quantity', value: 'value', class: "blue blue-darken-1 white--text " ,  },
+          { text: 'User name', value: 'carts._id', class: "blue blue-darken-1 white--text" },
+          { text: 'Product name', value: 'product.name', class: "blue blue-darken-1 white--text" },
+          { text: 'Price', value: 'price', class: "blue blue-darken-1 white--text " ,  },
+          { text: 'quantity', value: 'quntity', class: "blue blue-darken-1 white--text " ,  },
           { text: 'Description', value: 'description', class: "blue blue-darken-1 white--text " ,  },
           
-          { text: 'Total', value: 'value', class: "blue blue-darken-1 white--text " ,  },
+          { text: 'Total', value: 'total', class: "blue blue-darken-1 white--text " ,  },
 
         ],
       
@@ -188,8 +192,42 @@ export default {
     }, middleware: [
     'auth'
   ],
+
+  created(){
+    this.getCate()
+    },
+    mounted(){
+      axios.get('https://buynow-api.onrender.com/cart')
+      .then(res => {
+        this.carts = res.data
+      })
+      .catch(err => {
+        console.error(err)
+      })
+    },
+    methods:{
+        searchProduct()
+          {
+            this.$router.push(`/product?search=${this.search}`)
+          },
+      getCate(){
+      const axios = require('axios');
+        axios
+          .get(`https://buynow-api.onrender.com/api/category`)
+          .then((res) => {
+
+              this.cates= res.data
+              // console.log(this.cates)
+
+          })
+          .catch((error) => {
+          console.log(error.response)
+
+          })
+      },
        
     }
+}
 </script>
 
 <style scoped>
