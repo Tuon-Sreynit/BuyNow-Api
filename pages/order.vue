@@ -37,9 +37,9 @@
                   <td>{{ item.username }}</td>
                     <td>{{ item.name }}</td>
                   
-                    <td>{{ item.unitprice }}</td> 
+                    <td>${{ item.unitprice }}</td> 
                      <td>{{ item.quanity }}</td>
-                    <td>{{ item.totalprice }}</td>
+                    <td>${{ item.totalprice }}</td>
                     <td>{{ item.status}}</td>
                   </tr>
                 </tbody>
@@ -50,7 +50,7 @@
                  
                         <div class="total" style="display:flex; justify-content: flex-end; padding: 15px">
                            
-                                 <h3 >Total: <span style="color: red"> 7.80 </span>$</h3>
+                                 <h3 >Total: <span style="color: red"> 40.8</span>$</h3>
                          
                            
                          </div>
@@ -66,11 +66,11 @@ export default {
       return {
         desserts: [
           {
-            username:'Mony',
-            name: 'Strawberry Dress',
+            username:'nit',
+            name: 'Tuon Sreynit',
             quanity: 1, 
-            unitprice: 7.80, 
-            totalprice: 7.80,
+            unitprice: 40.80, 
+            totalprice: 40.80,
             status: "Paid"
           },
         

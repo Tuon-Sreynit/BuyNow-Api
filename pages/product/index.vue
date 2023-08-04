@@ -25,7 +25,7 @@
                                             <nuxt-link style="text-decoration: none" :to="'/product/'+product._id">
                                             
                                                 <center>
-                                                <img class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" 
+                                                <img class="white--text align-end" style="object-fit: contain;" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" 
                                                 height="200px" width="fit" :src="product.image" >
                                                 </center>
                                             
@@ -58,7 +58,7 @@
                                             <nuxt-link style="text-decoration: none" :to="'/product/'+cost._id">
                                             
                                                 <center>
-                                                <img class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" 
+                                                <img style="object-fit: contain;" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" 
                                                 height="200px" width="fit" :src="cost.image" >
                                                 </center>
                                             
@@ -92,7 +92,7 @@
                                             <nuxt-link style="text-decoration: none" :to="'/product/'+elec._id">
                                             
                                                 <center>
-                                                <img class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" 
+                                                <img  style="object-fit: contain;" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" 
                                                 height="200px" width="fit" :src="elec.image" >
                                                 </center>
                                             
@@ -126,7 +126,7 @@
                                             <nuxt-link style="text-decoration: none" :to="'/product/'+cloth._id">
                                             
                                                 <center>
-                                                <img class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" 
+                                                <img  style="object-fit: contain;" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" 
                                                 height="200px" width="fit" :src="cloth.image" >
                                                 </center>
                                             
@@ -160,7 +160,7 @@
                                             <nuxt-link style="text-decoration: none" :to="'/product/'+furn._id">
                                             
                                                 <center>
-                                                <img class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" 
+                                                <img  style="object-fit: contain;" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" 
                                                 height="200px" width="fit" :src="furn.image" >
                                                 </center>
                                             
@@ -193,7 +193,7 @@
                                             <nuxt-link style="text-decoration: none" :to="'/product/'+book._id">
                                             
                                                 <center>
-                                                <img class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" 
+                                                <img  style="object-fit: contain;" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" 
                                                 height="200px" width="fit" :src="book.image" >
                                                 </center>
                                             
@@ -256,7 +256,7 @@ export default {
     getProductdata() {
       var config = {
         method: 'get',
-        url: 'http://localhost:3001/api/product',
+        url: 'https://buynow-api.onrender.com/api/product',
       }
       this.$axios(config)
         .then((response) => {
@@ -274,7 +274,7 @@ export default {
     getCatedata() {
       var config = {
         method: 'get',
-        url: 'http://localhost:3001/api/category',
+        url: 'https://buynow-api.onrender.com/api/category',
       }
       this.$axios(config)
         .then((response) => {
@@ -291,7 +291,7 @@ export default {
     getClothedata(){
           var config = {
         method: 'get',
-        url: `http://localhost:3001/api/product?Category=64ca1fd77aa3c47a778b69e3`,
+        url: `https://buynow-api.onrender.com/api/product?Category=64ca1fd77aa3c47a778b69e3`,
 
       }
       this.$axios(config)
@@ -307,7 +307,7 @@ export default {
        getElecsdata(){
         var config = {
         method: 'get',
-        url: `http://localhost:3001/api/product?Category=64c8ed053e311fd1c7ffde88`,
+        url: `https://buynow-api.onrender.com/api/product?Category=64c8ed053e311fd1c7ffde88`,
 
       }
       this.$axios(config)
@@ -324,7 +324,7 @@ export default {
       getCostsdata(){
         var config = {
         method: 'get',
-        url: `http://localhost:3001/api/product?Category=64c8e9d6101025eb6e779f94`,
+        url: `https://buynow-api.onrender.com/api/product?Category=64c8e9d6101025eb6e779f94`,
 
       }
       this.$axios(config)
@@ -341,7 +341,7 @@ export default {
       getFurnsdata(){
         var config = {
         method: 'get',
-        url: `http://localhost:3001/api/product?Category=64ca20567aa3c47a778b69ff`,
+        url: `https://buynow-api.onrender.com/api/product?Category=64ca20567aa3c47a778b69ff`,
 
       }
       this.$axios(config)
@@ -357,7 +357,7 @@ export default {
       getBooksdata(){
         var config = {
         method: 'get',
-        url: `http://localhost:3001/api/product?Category=64ca901df2a12d6bee4c3389`,
+        url: `https://buynow-api.onrender.com/api/product?Category=64ca901df2a12d6bee4c3389`,
 
       }
       this.$axios(config)

@@ -95,7 +95,7 @@
     getCate(){
     const axios = require('axios');
         axios
-            .get(`http://localhost:3001/api/category`)
+            .get(`https://buynow-api.onrender.com/api/category`)
             .then((res) => {
 
                 this.cates= res.data

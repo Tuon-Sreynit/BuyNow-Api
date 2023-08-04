@@ -19,7 +19,7 @@
                       <v-card class="mx-auto"  max-width="360" style="padding: 10px; " outline>
                         <nuxt-link style="text-decoration:none" :to="'/product/'+cloth._id">
                           <center>
-                             <img class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="200px" width="100%" :src="cloth.image">
+                             <img style="object-fit: contain;" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="200px" width="100%" :src="cloth.image">
                          </center>
                       
                           <!-- <h5>Fleece Hoodie</h5>
@@ -134,7 +134,7 @@
                       <v-card class="mx-auto"  max-width="360" style="padding: 10px; " outline>
                         <nuxt-link style="text-decoration:none" :to="'/product/'+elec._id">
                           <center>
-                        <img class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="200px" width="100%" :src="elec.image">
+                        <img style="object-fit: contain;" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="200px" width="100%" :src="elec.image">
                          </center>
                       
                          <div class="box1">
@@ -268,7 +268,7 @@
                       <v-card class="mx-auto"  max-width="360" style="padding: 10px; " outline>
                         <nuxt-link style="text-decoration:none" :to="'/product/'+cost._id">
                           <center>
-                        <img class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="200px" width="100%" :src="cost.image">
+                        <img style="object-fit: contain;" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="200px" width="100%" :src="cost.image">
                          </center>
                       
                          <div class="box1">
@@ -399,7 +399,7 @@
                       <v-card class="mx-auto"  max-width="360" style="padding: 10px; " outline>
                         <nuxt-link style="text-decoration:none" :to="'/product/'+furn._id">
                           <center>
-                        <img class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" 
+                        <img style="object-fit: contain;" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" 
                         height="200px" width="100%" :src="furn.image" >
                          </center>
                       
@@ -536,7 +536,7 @@
                       <v-card class="mx-auto"  max-width="360" style="padding: 10px; " outline>
                         <nuxt-link style="text-decoration:none" :to="'/product/'+book._id">
                           <center>
-                        <img class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" 
+                        <img style="object-fit: contain;" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" 
                         height="200px" width="100%" :src="book.image" >
                          </center>
                       
@@ -621,7 +621,7 @@
       getClothedata(){
           var config = {
         method: 'get',
-        url: `http://localhost:3001/api/product?Category=64ca1fd77aa3c47a778b69e3`,
+        url: `https://buynow-api.onrender.com/api/product?Category=64ca1fd77aa3c47a778b69e3`,
 
       }
       this.$axios(config)
@@ -637,7 +637,7 @@
        getElecsdata(){
         var config = {
         method: 'get',
-        url: `http://localhost:3001/api/product?Category=64c8ed053e311fd1c7ffde88`,
+        url: `https://buynow-api.onrender.com/api/product?Category=64c8ed053e311fd1c7ffde88`,
 
       }
       this.$axios(config)
@@ -654,7 +654,7 @@
       getCostsdata(){
         var config = {
         method: 'get',
-        url: `http://localhost:3001/api/product?Category=64c8e9d6101025eb6e779f94`,
+        url: `https://buynow-api.onrender.com/api/product?Category=64c8e9d6101025eb6e779f94`,
 
       }
       this.$axios(config)
@@ -671,7 +671,7 @@
       getFurnsdata(){
         var config = {
         method: 'get',
-        url: `http://localhost:3001/api/product?Category=64ca20567aa3c47a778b69ff`,
+        url: `https://buynow-api.onrender.com/api/product?Category=64ca20567aa3c47a778b69ff`,
 
       }
       this.$axios(config)
@@ -687,7 +687,7 @@
       getBooksdata(){
         var config = {
         method: 'get',
-        url: `http://localhost:3001/api/product?Category=64ca901df2a12d6bee4c3389`,
+        url: `https://buynow-api.onrender.com/api/product?Category=64ca901df2a12d6bee4c3389`,
 
       }
       this.$axios(config)

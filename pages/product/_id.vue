@@ -5,23 +5,23 @@
             <!-- swiper1 -->
             <swiper class="swiper gallery-top" :options="swiperOptionTop" ref="swiperTop">
             
-                <swiper-slide ><img class="img" :src="p_item.image"> </swiper-slide>
-                <swiper-slide ><img  class="img" :src="p_item.image"> </swiper-slide>
+                <swiper-slide ><img style="object-fit: contain;" class="img" :src="p_item.image"> </swiper-slide>
+                <swiper-slide ><img style="object-fit: contain;"  class="img" :src="p_item.image"> </swiper-slide>
                 <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
                 <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
             </swiper>
             <!-- swiper2 Thumbs -->
             <swiper class="swiper gallery-thumbs" :options="swiperOptionThumbs" ref="swiperThumbs">
            
-                <swiper-slide class="slide"><img class="img_thumnail" :src="p_item.image"> </swiper-slide>
-                <swiper-slide class="slide"><img class="img_thumnail" :src="p_item.image"> </swiper-slide>
+                <swiper-slide class="slide"><img style="object-fit: contain;" class="img_thumnail" :src="p_item.image"> </swiper-slide>
+                <swiper-slide class="slide"><img style="object-fit: contain;" class="img_thumnail" :src="p_item.image"> </swiper-slide>
             </swiper>
              </div>
        <div>
         <div>
              <v-row>
                     <v-col align="center" md="5" class="cols-12 mt-5">
-                        <img class="img_demo" :src="p_item.image"></img>
+                        <img style="object-fit: contain;" class="img_demo" :src="p_item.image" />
                     </v-col>
                     <v-col  align="start" md="6" class="py-15 cols-12 ">
                         <h2>{{p_item.name}}</h2>
@@ -36,8 +36,8 @@
                         </div>
                        
                         <div class="detail_product pt-5">
-                            <div><v-btn color="blue"> <h4 style="color:white; font-weight:bold">ADD TO CART </h4></v-btn></div>
-                            <div><v-btn  color="red"><h4 style="color:white; font-weight:bold">CHECK OUT </h4></v-btn> </div>
+                            <div><v-btn @click="addToCart()" color="blue"> <h4 style="color:white; font-weight:bold">ADD TO CART </h4></v-btn></div>
+                            <div><v-btn to="/checkout"  color="red"><h4 style="color:white; font-weight:bold">CHECK OUT </h4></v-btn> </div>
                         </div>
                     </v-col>   
               </v-row> 
@@ -51,7 +51,7 @@
                           <v-col  v-for="r_item in r_items.slice(0,4) " :key="r_item.id" cols="12" sm="3" v-show="r_items.id!=$route.params.id">
                             <v-card class="mx-auto"  max-width="360" style="padding: 10px; " outline>
                               <nuxt-link style="text-decoration: none" :to="'/product/'+r_item._id">
-                              <center><img class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="200px" width="100%" :src="r_item.image"></center>
+                              <center><img style="object-fit: contain;" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="200px" width="100%" :src="r_item.image"></center>
                               
                               <div class="box1">
                                   
@@ -73,6 +73,7 @@
   <script>
     import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
     import 'swiper/css/swiper.css'
+    import axios from 'axios'
   
     export default {
       name: 'swiper-example-thumbs-gallery',
@@ -80,6 +81,8 @@
       components: {
         Swiper,
         SwiperSlide
+      },
+      methods: {
       },
       data() {
         return {
@@ -112,6 +115,7 @@
           swiperTop.controller.control = swiperThumbs
           swiperThumbs.controller.control = swiperTop
         })
+        // console.log($auth.user.data.firstname);
       },
       created(){
         this.getProductbyID()
@@ -120,7 +124,7 @@
           var axios = require('axios')
           var config = {
       method: 'get',
-      url: `http://localhost:3001/api/product/${this.$route.params.id}`,
+      url: `https://buynow-api.onrender.com/api/product/${this.$route.params.id}`,
       range:'0-3'
       }
       var data = await axios(config);
@@ -132,7 +136,7 @@
    
     var config = {
         method: 'get',
-        url: 'http://localhost:3001/api/product',
+        url: 'https://buynow-api.onrender.com/api/product',
       
       }
       this.$axios(config)
@@ -144,8 +148,26 @@
         .catch(function (error) {
           console.log(error)
         })
-   }
-     }
+   },
+   
+   addToCart() {
+          console.log('idk');
+          axios.post('https://buynow-api.onrender.com/cart/add', {
+            product: this.$route.params.id,
+            user: JSON.parse(localStorage.getItem('user'))._id,
+            price: this.p_item.price,
+            quantity: 1
+          })
+          .then(res => {
+            console.log("yes");
+            console.log(res.data)
+          })
+          .catch(err => {
+            console.log('no');
+            console.log(err);
+          })
+        }
+  }
 
 }
   </script>

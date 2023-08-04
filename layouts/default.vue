@@ -39,7 +39,11 @@ export default {
     HeaderMenu,
     FooterPage, 
     PhoneNavbar
-  }
+  },
+  created(){
+  this.$store.dispatch('getcarts')
+  
+},
 }
 </script>
 <style>

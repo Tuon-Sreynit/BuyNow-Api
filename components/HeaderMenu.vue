@@ -2,7 +2,7 @@
    <div   id="box1" class="header">
     <v-row style="padding: 0">
       <v-col class="mt-3 col-3" align="center"  md="3"  >
-            <img class="size" src="~/assets/img/logo1.png"></img>
+            <img class="size" src="~/assets/img/logo1.png">
         </v-col>
         <v-col  class=" col-9" md="6" justify="center"> 
              <div class="container" >
@@ -13,7 +13,7 @@
                             <v-btn text width="130px" v-bind="attrs" v-on="on" >
                               <div style="display: flex; justify-content: center">
                                   <div style="margin-top: 20px"><h4>Categories</h4></div> 
-                                  <div><img src="~/assets/img/arrow.png"></img></div> 
+                                  <div><img src="~/assets/img/arrow.png"></div> 
                               </div>
                             </v-btn>
                           </template>
@@ -58,21 +58,21 @@
                   <v-navigation-drawer   right temporary style="position:fixed; top:0;height:100vh;width: 550px " v-model="drawer"    >
                   <v-list-item style="margin-top: 20px;margin-left: 20px; margin-right: 20px">
             
-                       <h3 style="font-size: 1.2em;font-weight: 200;">Your added item is</h3>
+                       <h3 style="font-size: 1.2em;font-weight: 200;">Your added product is</h3>
                   </v-list-item>
-                  <v-list-item style="margin-top: 30px;" >
-                      <v-row justify="start">
+                  <v-list-item style="margin-top: 30px;" v-for="cart in carts" :key="cart.id">
+                      <v-row  justify="start"  >
                         <v-col align="start" md="4" class="pa-4">
-                          <img height="150px" width="70%" src="http://cdn.shopify.com/s/files/1/0011/9783/4252/products/20_375a8763-f5d7-4184-a352-4523ef713733.jpg?v=1576267132"></img>
+                          <img height="150px" width="70%" :src="cart.product.image">
                         </v-col>
                         <v-col align="start"  md="8">
-                            <h2 style="text-transform: uppercase;font-weight: 300;color: black">Dress</h2>
-                            <h3>Quantity : <span style="color: red"> 1</span></h3>
-                            <h2 style="text-transform: uppercase;font-weight: 300;color: black">$ 12</h2>
+                            <h2 style="text-transform: uppercase;font-weight: 300;color: black">{{cart.product.name}}</h2>
+                            <h3>Quantity : <span style="color: red"> {{cart.quantity}}</span></h3>
+                            <h2 style="text-transform: uppercase;font-weight: 300;color: black">$ {{cart.price}}</h2>
                             <v-row class="mt-1">
-                              <v-col><v-btn icon><v-icon>mdi-plus</v-icon></v-btn></v-col>
-                              <v-col><v-btn icon><v-icon>mdi-minus</v-icon></v-btn></v-col>
-                              <v-col><v-btn icon><v-icon>mdi-delete</v-icon></v-btn></v-col>
+                              <v-col><v-btn @click="increase(cart._id)" icon><v-icon>mdi-plus</v-icon></v-btn></v-col>
+                              <v-col><v-btn @click="decrease(cart._id)" icon><v-icon>mdi-minus</v-icon></v-btn></v-col>
+                              <v-col><v-btn @click="deleteCart(cart._id)" icon><v-icon>mdi-delete</v-icon></v-btn></v-col>
                             </v-row>
                         </v-col>
                       </v-row>
@@ -103,6 +103,7 @@
 <script>
 import PageMenu from "~/components/PageMenu.vue"
 import PhoneNavbar from "~/components/PhoneNavbar.vue"
+import axios from 'axios'
   export default {
     components:{
     PageMenu,
@@ -112,6 +113,7 @@ import PhoneNavbar from "~/components/PhoneNavbar.vue"
         return {
           serch: '',
           cates: [],
+          carts: [],
           drawer: false, 
           dialog: false,
           justify: [
@@ -125,27 +127,81 @@ import PhoneNavbar from "~/components/PhoneNavbar.vue"
       created(){
     this.getCate()
     },
+    mounted(){
+      axios.get('https://buynow-api.onrender.com/cart')
+      .then(res => {
+        this.carts = res.data
+      })
+      .catch(err => {
+        console.error(err)
+      })
+    },
     methods:{
-      searchProduct()
-        {
-          this.$router.push(`/product?search=${this.search}`)
-        },
-    getCate(){
-    const axios = require('axios');
+        searchProduct()
+          {
+            this.$router.push(`/product?search=${this.search}`)
+          },
+      getCate(){
+      const axios = require('axios');
         axios
-            .get(`http://localhost:3001/api/category`)
-            .then((res) => {
+          .get(`https://buynow-api.onrender.com/api/category`)
+          .then((res) => {
 
-                this.cates= res.data
-                // console.log(this.cates)
+              this.cates= res.data
+              // console.log(this.cates)
 
-            })
-            .catch((error) => {
-            console.log(error.response)
+          })
+          .catch((error) => {
+          console.log(error.response)
 
-            })
+          })
+      },
+      deleteCart(id){
+        axios.delete('https://buynow-api.onrender.com/cart/delete/'+id)
+        .then(res => {
+          axios.get('https://buynow-api.onrender.com/cart')
+          .then(res => {
+            this.carts = res.data
+          })
+          .catch(err => {
+            console.error(err)
+          })
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      },
+      increase(id) {
+        axios.post('https://buynow-api.onrender.com/cart/increase/'+id)
+        .then(res => {
+          axios.get('https://buynow-api.onrender.com/cart')
+          .then(res => {
+            this.carts = res.data
+          })
+          .catch(err => {
+            console.error(err)
+          })
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      },
+      decrease(id) {
+        axios.post('https://buynow-api.onrender.com/cart/decrease/'+id)
+        .then(res => {
+          axios.get('https://buynow-api.onrender.com/cart')
+          .then(res => {
+            this.carts = res.data
+          })
+          .catch(err => {
+            console.error(err)
+          })
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      }
     }
-  }
 }   
 
 </script>

@@ -129,27 +129,28 @@
                 </div>
             </v-col>
             <v-col  md="4" style="margin-top:20px">
-              <v-card>
-                <v-row justify="start">
-                  <v-col align="center" md="4" class="pa-4">
-                    <img height="100px" width="70%" src="http://cdn.shopify.com/s/files/1/0011/9783/4252/products/20_375a8763-f5d7-4184-a352-4523ef713733.jpg?v=1576267132"></img>
-                  </v-col>
-                  <v-col align="start"  md="8">
-                      <h4 style="text-transform: uppercase;font-weight: 300;color: black">Dress</h4>
-                      <h3>Quantity : <span style="color: red"> 1</span></h3>
-                      <h3 style="text-transform: uppercase;font-weight: 300;color: black">$ 12</h3>
-                      <v-row >
-                        <v-col><v-btn icon><v-icon small>mdi-plus</v-icon></v-btn></v-col>
-                        <v-col><v-btn icon><v-icon  small>mdi-minus</v-icon></v-btn></v-col>
-                        <v-col><v-btn icon><v-icon  small>mdi-delete</v-icon></v-btn></v-col>
+              <v-card style="margin-top: 30px; padding: 10px;" v-for="cart in carts" :key="cart.id">
+                <v-row  justify="start"  >
+                        <v-col align="start" md="4" class="pa-4">
+                          <img height="150px" width="70%" :src="cart.product.image">
+                        </v-col>
+                        <v-col align="start"  md="8">
+                            <h2 style="text-transform: uppercase;font-weight: 300;color: black">{{cart.product.name}}</h2>
+                            <h3>Quantity : <span style="color: red"> {{cart.quantity}}</span></h3>
+                            <h2 style="text-transform: uppercase;font-weight: 300;color: black">$ {{cart.price}}</h2>
+                            <v-row class="mt-1">
+                              <v-col><v-btn @click="increase(cart._id)" icon><v-icon>mdi-plus</v-icon></v-btn></v-col>
+                              <v-col><v-btn @click="decrease(cart._id)" icon><v-icon>mdi-minus</v-icon></v-btn></v-col>
+                              <v-col><v-btn @click="deleteCart(cart._id)" icon><v-icon>mdi-delete</v-icon></v-btn></v-col>
+                            </v-row>
+                        </v-col>
                       </v-row>
-                  </v-col>
-                </v-row>
                 <v-divider></v-divider>
-                 <div class="total">
-                    <h3 >Total: <span style="color: red"> 7.80 </span>$</h3>
-                 </div>
+                 
               </v-card>
+              <div class="total">
+                    <h3 >Total: <span style="color: red"> 40.30</span>$</h3>
+                 </div>
             </v-col>
          </v-row>
          <v-row>
@@ -162,11 +163,12 @@
 </div>
 </template>
 <script>
- 
+ import axios from 'axios'
 
 export default {
     data () {
       return {
+        carts: [],
         e1: 1,
         radioGroup: 1,
         bank: null,
@@ -186,6 +188,60 @@ export default {
       select_payment: null,
       }
     },
+    mounted(){
+      axios.get('https://buynow-api.onrender.com/cart')
+      .then(res => {
+        this.carts = res.data
+      })
+      .catch(err => {
+        console.error(err)
+      })
+    },
+    deleteCart(id){
+        axios.delete('https://buynow-api.onrender.com/cart/delete/'+id)
+        .then(res => {
+          axios.get('https://buynow-api.onrender.com/cart')
+          .then(res => {
+            this.carts = res.data
+          })
+          .catch(err => {
+            console.error(err)
+          })
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      },
+      increase(id) {
+        axios.post('https://buynow-api.onrender.com/cart/increase/'+id)
+        .then(res => {
+          axios.get('https://buynow-api.onrender.com/cart')
+          .then(res => {
+            this.carts = res.data
+          })
+          .catch(err => {
+            console.error(err)
+          })
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      },
+      decrease(id) {
+        axios.post('https://buynow-api.onrender.com/cart/decrease/'+id)
+        .then(res => {
+          axios.get('https://buynow-api.onrender.com/cart')
+          .then(res => {
+            this.carts = res.data
+          })
+          .catch(err => {
+            console.error(err)
+          })
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      }
   }
 </script>
 <style scoped>

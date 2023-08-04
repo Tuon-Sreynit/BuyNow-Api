@@ -207,7 +207,7 @@ validations: {
         register(){
             axios({
                 method: 'post',
-                url: 'http://localhost:3001/auth/register',
+                url: 'https://buynow-api.onrender.com/auth/register',
                 headers: { 
                      Authorization: `${this.$auth.strategy.token.get()}`,
                     'Content-Type': 'application/json'
